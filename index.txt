@@ -1,0 +1,189 @@
+DHYEY, [09-02-2025 12:29]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be Mine?</title>
+  <style>
+    /* Global styles for a loving theme */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #ff5e62;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff3e42;
+    }
+    .hidden {
+      display: none;
+    }
+    /* Styles for rolling feedback page */
+    #feedbackList {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      margin-top: 20px;
+    }
+    #feedbackList ul {
+      position: absolute;
+      width: 100%;
+      animation: scrollUp 20s linear infinite;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #feedbackList li {
+      padding: 10px;
+      font-size: 20px;
+    }
+    @keyframes scrollUp {
+      0% {
+        top: 100%;
+      }
+      100% {
+        top: -100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1: Enter Name -->
+  <div id="page1" class="container">
+    <h1>Hey Beautiful, what's your name?</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <br>
+    <button id="submitName">Submit</button>
+  </div>
+
+  <!-- Page 2: Proposal Question -->
+  <div id="page2" class="container hidden">
+    <h1 id="greeting"></h1>
+    <h2>DO U LOVE ME ?</h2>
+    <div id="responseMessage" style="margin: 20px; font-size: 18px;"></div>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <!-- Page 3: Rolling Loving Feedbacks -->
+  <div id="page3" class="container hidden">
+    <h1>Thank You for Saying Yes!</h1>
+    <div id="feedbackList">
+      <ul id="feedbackUl">
+        <!-- Feedback messages will be inserted here -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Get references to elements
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
+    const submitNameBtn = document.getElementById('submitName');
+    const nameInput = document.getElementById('nameInput');
+    const greeting = document.getElementById('greeting');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const responseMessage = document.getElementById('responseMessage');
+    const feedbackUl = document.getElementById('feedbackUl');
+    
+    let noClickCount = 0;
+    let userName = "";
+
+    // Page 1: When she submits her name
+    submitNameBtn.addEventListener('click', function() {
+      userName = nameInput.value.trim();
+      if (userName === "") {
+        alert("Please enter your name.");
+        return;
+      }
+      greeting.textContent = "Hi " + userName + ", will you be mine?";
+      page1.classList.add('hidden');
+      page2.classList.remove('hidden');
+    });
+
+    // Page 2: Handling the "No" button responses
+    noBtn.addEventListener('click', function() {
+      noClickCount++;
+
+DHYEY, [09-02-2025 12:29]
+if (noClickCount === 1) {
+        responseMessage.innerHTML = "😢 MAAN BHI JAA";
+      } else if (noClickCount === 2) {
+        responseMessage.innerHTML = "😭 kyu rula rhi hai, maan bhi jaa";
+      } else if (noClickCount >= 3) {
+        responseMessage.innerHTML = "🥺 PlZzzzz jonu maaan jaaa, kyu dil tod rhi hai";
+        noBtn.style.display = "none"; // Hide the No option after 3 attempts
+      }
+    });
+
+    // Page 2: When she clicks "Yes"
+    yesBtn.addEventListener('click', function() {
+      page2.classList.add('hidden');
+      page3.classList.remove('hidden');
+      generateFeedbacks();
+    });
+
+    // Generate 100 loving feedback messages on Page 3
+    function generateFeedbacks() {
+      // Array of sample loving feedback messages
+      const feedbackMessages = [
+        "I love you so much!",
+        "You're my sunshine!",
+        "Forever yours!",
+        "You complete me!",
+        "My heart beats for you!",
+        "You're the best thing in my life!",
+        "I cherish you!",
+        "My love for you is endless!",
+        "You're my dream come true!",
+        "Together forever!"
+      ];
+      
+      // Insert 100 messages into the list, selecting a random message each time
+      for (let i = 0; i < 100; i++) {
+        const message = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+        const li = document.createElement('li');
+        li.textContent = message;
+        feedbackUl.appendChild(li);
+      }
+    }
+  </script>
+</body>
+</html>
